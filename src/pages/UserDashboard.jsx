@@ -1,6 +1,7 @@
-import React from "react";
-import { useNavigate } from "react-router-dom";
+// src/pages/UserDashboard.jsx
 
+import { useNavigate } from "react-router-dom";
+import React, { useState } from "react";
 import {
   recommendedProducts,
   upcomingEvents,
@@ -23,6 +24,11 @@ import {
   faArrowRight,
   faClockRotateLeft,
   faBolt,
+  faUniversalAccess,
+  faFont,
+  faCircleHalfStroke,
+  faKeyboard,
+  faVolumeHigh,
 } from "@fortawesome/free-solid-svg-icons";
 
 export default function UserDashboard() {
@@ -385,6 +391,9 @@ export default function UserDashboard() {
           </div>
         </section>
       </main>
+
+      {/* BUBBLE MENU DISABILITAS */}
+      <AccessibilityBubble />
     </div>
   );
 }
@@ -392,7 +401,7 @@ export default function UserDashboard() {
 // === SMALL COMPONENTS ===
 
 function DashboardCard({ label, value, subtitle, accent }) {
-  // Mapping icon berdasarkan label (tanpa ubah props)
+  // Mapping icon berdasarkan label
   let icon = faGift;
   if (label.includes("Pesanan")) icon = faCartShopping;
   else if (label.includes("Lamaran")) icon = faBriefcase;
@@ -414,7 +423,6 @@ function DashboardCard({ label, value, subtitle, accent }) {
 }
 
 function QuickActionButton({ title, desc, onClick }) {
-  // Icon kecil sesuai judul
   let icon = faStore;
   if (title.includes("Destinasi")) icon = faLocationDot;
   else if (title.includes("Lowongan")) icon = faBriefcase;
@@ -437,7 +445,6 @@ function QuickActionButton({ title, desc, onClick }) {
 }
 
 function ActivityItem({ title, tag, time }) {
-  // Icon per kategori aktivitas
   let icon = faCartShopping;
   if (tag === "Lowongan") icon = faBriefcase;
   if (tag === "Wisata") icon = faLocationDot;
@@ -482,7 +489,6 @@ function JobStatus({ posisi, tempat, status, statusColor }) {
   );
 }
 
-// Masih opsional, tapi sudah ikut tema putih–biru–hitam
 function RecommendCard({ title, type, info }) {
   return (
     <div className="flex flex-col justify-between rounded-2xl border border-blue-100 bg-gradient-to-br from-white to-sky-50 p-4 shadow-sm">
@@ -501,6 +507,122 @@ function RecommendCard({ title, type, info }) {
         Lihat detail
         <FontAwesomeIcon icon={faArrowRight} className="text-[10px]" />
       </button>
+    </div>
+  );
+}
+
+/**
+ * Bubble Menu Disabilitas / Aksesibilitas
+ * - Icon bulat di kanan bawah
+ * - Panel muncul saat di-hover (tidak perlu klik)
+ */
+function AccessibilityBubble() {
+  const [open, setOpen] = useState(false);
+
+  const toggleOpen = () => {
+    setOpen((prev) => !prev);
+  };
+
+  return (
+    <div className="fixed bottom-6 right-6 z-40">
+      {/* Bikin posisi relatif di sini supaya panel bisa absolute
+          tanpa menggeser icon */}
+      <div className="relative">
+        {/* PANEL / POPUP – absolute di atas icon, icon tidak ikut turun */}
+        {open && (
+          <div className="absolute bottom-14 right-0 w-64 rounded-2xl border border-blue-100 bg-white/95 p-3 text-[11px] text-slate-700 shadow-lg backdrop-blur-sm">
+            <p className="mb-1 flex items-center justify-between text-[11px] font-semibold text-slate-900">
+              <span>Menu Disabilitas</span>
+              <span className="rounded-full bg-blue-50 px-2 py-0.5 text-[9px] text-blue-700 border border-blue-100">
+                Beta
+              </span>
+            </p>
+            <p className="mb-2 text-[10px] text-slate-500">
+              Pengaturan tampilan untuk membantu pengguna dengan kebutuhan
+              khusus.
+            </p>
+
+            <div className="space-y-2">
+              {/* Perbesar teks */}
+              <div className="flex items-start gap-2 rounded-xl bg-slate-50 px-2 py-1.5">
+                <div className="mt-0.5 flex h-6 w-6 items-center justify-center rounded-full bg-blue-50 text-blue-700 border border-blue-100">
+                  <FontAwesomeIcon icon={faFont} className="text-[11px]" />
+                </div>
+                <div>
+                  <p className="text-[11px] font-semibold text-slate-900">
+                    Perbesar teks
+                  </p>
+                  <p className="text-[10px] text-slate-500">
+                    Membantu pengguna yang kesulitan membaca tulisan kecil.
+                  </p>
+                </div>
+              </div>
+
+              {/* Kontras tinggi */}
+              <div className="flex items-start gap-2 rounded-xl bg-slate-50 px-2 py-1.5">
+                <div className="mt-0.5 flex h-6 w-6 items-center justify-center rounded-full bg-blue-50 text-blue-700 border border-blue-100">
+                  <FontAwesomeIcon
+                    icon={faCircleHalfStroke}
+                    className="text-[11px]"
+                  />
+                </div>
+                <div>
+                  <p className="text-[11px] font-semibold text-slate-900">
+                    Mode kontras tinggi
+                  </p>
+                  <p className="text-[10px] text-slate-500">
+                    Ubah warna tampilan agar elemen lebih jelas terlihat.
+                  </p>
+                </div>
+              </div>
+
+              {/* Navigasi keyboard */}
+              <div className="flex items-start gap-2 rounded-xl bg-slate-50 px-2 py-1.5">
+                <div className="mt-0.5 flex h-6 w-6 items-center justify-center rounded-full bg-blue-50 text-blue-700 border border-blue-100">
+                  <FontAwesomeIcon icon={faKeyboard} className="text-[11px]" />
+                </div>
+                <div>
+                  <p className="text-[11px] font-semibold text-slate-900">
+                    Navigasi keyboard
+                  </p>
+                  <p className="text-[10px] text-slate-500">
+                    Gunakan Tab &amp; Enter untuk berpindah dan memilih menu.
+                  </p>
+                </div>
+              </div>
+
+              {/* Baca halaman */}
+              <div className="flex items-start gap-2 rounded-xl bg-slate-50 px-2 py-1.5">
+                <div className="mt-0.5 flex h-6 w-6 items-center justify-center rounded-full bg-blue-50 text-blue-700 border border-blue-100">
+                  <FontAwesomeIcon
+                    icon={faVolumeHigh}
+                    className="text-[11px]"
+                  />
+                </div>
+                <div>
+                  <p className="text-[11px] font-semibold text-slate-900">
+                    Baca halaman
+                  </p>
+                  <p className="text-[10px] text-slate-500">
+                    Konten penting dapat dibacakan untuk pengguna dengan
+                    hambatan visual.
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+        )}
+
+        {/* ICON BULAT – posisinya tetap, gak geser pas panel muncul */}
+        <button
+          type="button"
+          onClick={toggleOpen}
+          className="flex h-11 w-11 items-center justify-center rounded-full bg-blue-600 text-white shadow-lg ring-2 ring-blue-200 transition hover:bg-blue-500"
+          aria-label="Menu disabilitas"
+        >
+          <FontAwesomeIcon icon={faUniversalAccess} className="text-lg" />
+        </button>
+      </div>
     </div>
   );
 }
