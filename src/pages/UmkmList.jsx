@@ -289,9 +289,7 @@ export default function UmkmList() {
           </div>
 
           <p className="mt-2 text-[10px] text-slate-500">
-            Catatan: Peta ini masih dummy (layout statis). Nanti dapat diganti
-            dengan integrasi map sesungguhnya (misalnya Leaflet / Google Maps)
-            menggunakan koordinat latitude–longitude asli UMKM.
+            Catatan: Harus berhati hati jika transaksi di luar aplikasi
           </p>
         </div>
       </div>
