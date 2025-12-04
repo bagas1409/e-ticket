@@ -1,159 +1,270 @@
-import React, { useState } from "react";
+// src/pages/LowonganKerja.jsx
+import React, { useMemo, useState } from "react";
 import { Link } from "react-router-dom";
-
-const dummyJobs = [
-  {
-    id: 1,
-    posisi: "Staff Administrasi UMKM",
-    perusahaan: "CV Sejahtera Mandiri",
-    lokasi: "Pringsewu Kota",
-    tipe: "Full-time",
-    gaji: "Rp2.500.000 - Rp3.000.000",
-    status: "Diproses",
-    desc: "Mengelola administrasi penjualan, arsip, dan laporan sederhana untuk UMKM skala kecil-menengah.",
-  },
-  {
-    id: 2,
-    posisi: "Kasir Minimarket",
-    perusahaan: "Mart Pringsewu",
-    lokasi: "Pagelaran",
-    tipe: "Shift",
-    gaji: "Rp2.200.000",
-    status: "Terkirim",
-    desc: "Melayani transaksi kasir, input penjualan harian, dan membantu penataan barang di rak.",
-  },
-  {
-    id: 3,
-    posisi: "Content Creator UMKM",
-    perusahaan: "Rumah Kreatif Pringsewu",
-    lokasi: "Gading Rejo",
-    tipe: "Part-time",
-    gaji: "Negosiasi",
-    status: "Ditolak",
-    desc: "Membuat konten foto & video sederhana untuk promosi produk UMKM lokal di media sosial.",
-  },
-];
+import { jobVacancies, JOB_CATEGORIES, JOB_TYPES } from "../data/lowonganDummy";
 
 export default function LowonganKerja() {
   const [search, setSearch] = useState("");
-  const [selected, setSelected] = useState(dummyJobs[0]);
+  const [selectedCategory, setSelectedCategory] = useState("Semua");
+  const [selectedType, setSelectedType] = useState("Semua");
+  const [selectedKecamatan, setSelectedKecamatan] = useState("Semua");
+  const [onlyOpen, setOnlyOpen] = useState(true);
 
-  const filtered = dummyJobs.filter((j) => {
-    const q = search.toLowerCase();
-    return (
-      j.posisi.toLowerCase().includes(q) ||
-      j.perusahaan.toLowerCase().includes(q) ||
-      j.lokasi.toLowerCase().includes(q)
-    );
-  });
+  const kecamatanOptions = useMemo(() => {
+    const set = new Set(jobVacancies.map((j) => j.kecamatan));
+    return ["Semua", ...Array.from(set)];
+  }, []);
+
+  const filteredJobs = useMemo(() => {
+    return jobVacancies.filter((job) => {
+      if (onlyOpen && job.status !== "Dibuka") return false;
+
+      if (selectedCategory !== "Semua" && job.category !== selectedCategory)
+        return false;
+
+      if (selectedType !== "Semua" && job.type !== selectedType) return false;
+
+      if (
+        selectedKecamatan !== "Semua" &&
+        job.kecamatan !== selectedKecamatan
+      ) {
+        return false;
+      }
+
+      const term = search.toLowerCase().trim();
+      if (term) {
+        const haystack = (
+          job.title +
+          " " +
+          job.companyName +
+          " " +
+          job.location +
+          " " +
+          job.tags.join(" ")
+        ).toLowerCase();
+        if (!haystack.includes(term)) return false;
+      }
+
+      return true;
+    });
+  }, [search, selectedCategory, selectedType, selectedKecamatan, onlyOpen]);
 
   return (
-    <div className="mx-auto max-w-6xl px-4 py-6 text-slate-50">
-      {/* HEADER */}
-      <div className="mb-5 flex flex-col gap-3 md:flex-row md:items-center md:justify-between">
-        <div>
-          <p className="text-xs uppercase tracking-[0.2em] text-emerald-400/60">
-            Lowongan Kerja
-          </p>
-          <h1 className="text-lg font-semibold md:text-xl">
-            Cari Lowongan Kerja di Sekitar Pringsewu
-          </h1>
-          <p className="mt-1 text-xs text-slate-400">
-            Data masih dummy, nanti bisa dihubungkan ke API loker & tracking
-            status lamaran.
-          </p>
+    <div className="min-h-screen bg-slate-50">
+      <div className="mx-auto max-w-6xl px-4 py-6 text-slate-900">
+        {/* HEADER */}
+        <div className="mb-5 flex flex-col gap-3 md:flex-row md:items-center md:justify-between">
+          <div>
+            <p className="text-xs uppercase tracking-[0.2em] text-blue-600">
+              Lowongan Kerja
+            </p>
+            <h1 className="text-lg font-semibold md:text-2xl text-slate-900">
+              Cari Kesempatan Kerja di UMKM & Event Pringsewu
+            </h1>
+            <p className="mt-1 text-xs md:text-sm text-slate-600">
+              Temukan posisi di UMKM lokal, kedai kopi, produksi, hingga event
+              kolaborasi. Filter berdasarkan kategori, kecamatan, dan jenis
+              kerja.
+            </p>
+          </div>
+          <Link
+            to="/"
+            className="self-start text-xs md:text-sm text-blue-600 underline-offset-2 hover:underline"
+          >
+            ← Kembali ke Dashboard
+          </Link>
         </div>
-        <Link
-          to="/"
-          className="text-xs text-emerald-300 underline-offset-2 hover:underline"
-        >
-          ← Kembali ke Dashboard
-        </Link>
-      </div>
 
-      {/* SEARCH */}
-      <div className="mb-4">
-        <input
-          type="text"
-          placeholder="Cari posisi, perusahaan, atau lokasi..."
-          className="w-full rounded-xl border border-slate-800 bg-slate-900/70 px-3 py-2 text-xs text-slate-100 placeholder:text-slate-500 focus:border-emerald-500 focus:outline-none"
-          value={search}
-          onChange={(e) => setSearch(e.target.value)}
-        />
-      </div>
-
-      <div className="grid gap-4 md:grid-cols-3">
-        {/* LIST LOKER */}
-        <div className="md:col-span-2 space-y-3">
-          {filtered.map((job) => (
-            <button
-              key={job.id}
-              onClick={() => setSelected(job)}
-              className="flex w-full items-start justify-between gap-3 rounded-2xl border border-slate-800 bg-slate-900/60 p-3 text-left text-xs hover:border-emerald-500/60"
-            >
-              <div>
-                <p className="text-sm font-semibold text-slate-50">
-                  {job.posisi}
-                </p>
-                <p className="text-[11px] text-slate-400">
-                  {job.perusahaan} • {job.lokasi}
-                </p>
-                <p className="mt-1 text-[11px] text-slate-300">
-                  {job.tipe} • {job.gaji}
-                </p>
+        {/* FILTER BAR */}
+        <section className="mb-4 space-y-3 rounded-2xl border border-slate-200 bg-white p-4 text-xs shadow-sm">
+          {/* Pencarian */}
+          <div className="flex flex-col gap-3 md:flex-row md:items-center md:justify-between">
+            <div className="flex-1">
+              <p className="mb-1 text-[11px] font-semibold text-slate-800">
+                Cari lowongan
+              </p>
+              <div className="flex items-center gap-2 rounded-full border border-slate-300 bg-slate-50 px-3 py-1.5">
+                <span className="text-[13px] text-slate-500">🔍</span>
+                <input
+                  value={search}
+                  onChange={(e) => setSearch(e.target.value)}
+                  placeholder="Cari berdasarkan posisi, UMKM, atau lokasi..."
+                  className="flex-1 bg-transparent text-[11px] text-slate-800 outline-none placeholder:text-slate-400"
+                />
               </div>
-              <span
-                className={`rounded-full px-3 py-1 text-[10px] font-medium ${
-                  job.status === "Diproses"
-                    ? "bg-amber-500/20 text-amber-300 border border-amber-500/40"
-                    : job.status === "Ditolak"
-                    ? "bg-rose-500/15 text-rose-300 border border-rose-500/40"
-                    : "bg-slate-800 text-slate-200 border border-slate-600"
-                }`}
+            </div>
+            <div className="flex flex-wrap items-center gap-2 md:w-64 md:justify-end">
+              <label className="inline-flex items-center gap-2 rounded-full border border-slate-300 bg-slate-50 px-3 py-1">
+                <input
+                  type="checkbox"
+                  checked={onlyOpen}
+                  onChange={(e) => setOnlyOpen(e.target.checked)}
+                  className="h-3 w-3 rounded border-slate-400 text-blue-600 accent-blue-600"
+                />
+                <span className="text-[11px] text-slate-700">
+                  Tampilkan yang masih dibuka saja
+                </span>
+              </label>
+            </div>
+          </div>
+
+          {/* Filter Kategori / Tipe / Kecamatan */}
+          <div className="grid gap-3 md:grid-cols-3">
+            <div>
+              <p className="mb-1 text-[11px] text-slate-700">Kategori</p>
+              <select
+                value={selectedCategory}
+                onChange={(e) => setSelectedCategory(e.target.value)}
+                className="w-full rounded-xl border border-slate-300 bg-white px-2 py-1.5 text-[11px] text-slate-800 focus:border-blue-500 focus:outline-none"
               >
-                {job.status}
-              </span>
-            </button>
-          ))}
+                <option value="Semua">Semua kategori</option>
+                {JOB_CATEGORIES.map((c) => (
+                  <option key={c} value={c}>
+                    {c}
+                  </option>
+                ))}
+              </select>
+            </div>
 
-          {filtered.length === 0 && (
-            <p className="text-xs text-slate-500">
-              Tidak ada lowongan yang cocok dengan pencarian.
+            <div>
+              <p className="mb-1 text-[11px] text-slate-700">Jenis Kerja</p>
+              <select
+                value={selectedType}
+                onChange={(e) => setSelectedType(e.target.value)}
+                className="w-full rounded-xl border border-slate-300 bg-white px-2 py-1.5 text-[11px] text-slate-800 focus:border-blue-500 focus:outline-none"
+              >
+                <option value="Semua">Semua jenis</option>
+                {JOB_TYPES.map((t) => (
+                  <option key={t} value={t}>
+                    {t}
+                  </option>
+                ))}
+              </select>
+            </div>
+
+            <div>
+              <p className="mb-1 text-[11px] text-slate-700">Kecamatan</p>
+              <select
+                value={selectedKecamatan}
+                onChange={(e) => setSelectedKecamatan(e.target.value)}
+                className="w-full rounded-xl border border-slate-300 bg-white px-2 py-1.5 text-[11px] text-slate-800 focus:border-blue-500 focus:outline-none"
+              >
+                {kecamatanOptions.map((k) => (
+                  <option key={k} value={k}>
+                    {k === "Semua" ? "Semua kecamatan" : k}
+                  </option>
+                ))}
+              </select>
+            </div>
+          </div>
+        </section>
+
+        {/* HASIL LIST */}
+        <section className="mt-3">
+          <div className="mb-3 flex items-center justify-between text-[11px]">
+            <p className="text-slate-600">
+              Menampilkan{" "}
+              <span className="font-semibold text-blue-600">
+                {filteredJobs.length} lowongan
+              </span>{" "}
+              {onlyOpen && "(status: Dibuka)"}
             </p>
-          )}
-        </div>
+          </div>
 
-        {/* DETAIL LOKER */}
-        <div className="rounded-2xl border border-slate-800 bg-slate-900/70 p-4 text-xs">
-          <p className="text-[11px] font-semibold uppercase tracking-wide text-emerald-300">
-            Detail Lowongan
-          </p>
-          {selected ? (
-            <>
-              <h2 className="mt-2 text-sm font-semibold text-slate-50">
-                {selected.posisi}
-              </h2>
-              <p className="text-[11px] text-slate-400">
-                {selected.perusahaan} • {selected.lokasi}
+          {filteredJobs.length === 0 ? (
+            <div className="flex h-40 items-center justify-center rounded-2xl border border-dashed border-slate-300 bg-slate-100">
+              <p className="text-xs text-slate-500">
+                Belum ada lowongan yang cocok dengan filter saat ini. Coba
+                longgarkan kriteria pencarian.
               </p>
-              <p className="mt-2 text-[11px] text-slate-300">
-                Tipe: {selected.tipe}
-              </p>
-              <p className="mt-1 text-[11px] text-slate-300">
-                Perkiraan Gaji: {selected.gaji}
-              </p>
-              <p className="mt-3 text-[11px] text-slate-300">{selected.desc}</p>
-
-              <button className="mt-4 w-full rounded-full bg-emerald-500 px-3 py-2 text-[11px] font-semibold text-slate-950 hover:bg-emerald-400">
-                Lamar Sekarang (Dummy)
-              </button>
-            </>
+            </div>
           ) : (
-            <p className="mt-3 text-[11px] text-slate-500">
-              Pilih salah satu lowongan untuk melihat detail.
-            </p>
+            <div className="grid gap-3 md:grid-cols-2">
+              {filteredJobs.map((job) => {
+                const isOpen = job.status === "Dibuka";
+                return (
+                  <Link
+                    key={job.id}
+                    to={`/lowongan/${job.id}`}
+                    className="group flex h-full flex-col rounded-2xl border border-slate-200 bg-white p-3 text-xs shadow-sm transition hover:-translate-y-1 hover:border-blue-400 hover:shadow-lg"
+                  >
+                    <div className="mb-1 flex items-start justify-between gap-2">
+                      <div className="flex-1">
+                        <p className="text-[13px] font-semibold text-slate-900">
+                          {job.title}
+                        </p>
+                        <p className="mt-0.5 text-[11px] text-slate-600">
+                          {job.companyName}
+                        </p>
+                      </div>
+                      <span
+                        className={`rounded-full px-2 py-0.5 text-[10px] font-semibold ${
+                          isOpen
+                            ? "border border-blue-200 bg-blue-50 text-blue-700"
+                            : "border border-slate-300 bg-slate-100 text-slate-600"
+                        }`}
+                      >
+                        {job.status}
+                      </span>
+                    </div>
+
+                    <p className="text-[11px] text-slate-600">
+                      📍 {job.location} • Kec. {job.kecamatan}
+                    </p>
+                    <p className="mt-1 text-[11px] font-semibold text-blue-600">
+                      {job.salaryRange}
+                    </p>
+
+                    <div className="mt-2 flex flex-wrap gap-1">
+                      <span className="rounded-full bg-slate-100 px-2 py-0.5 text-[10px] text-slate-700">
+                        {job.category}
+                      </span>
+                      <span className="rounded-full bg-slate-100 px-2 py-0.5 text-[10px] text-slate-700">
+                        {job.type}
+                      </span>
+                      {job.tags.slice(0, 2).map((t) => (
+                        <span
+                          key={`${job.id}-${t}`}
+                          className="rounded-full bg-slate-100 px-2 py-0.5 text-[10px] text-slate-600"
+                        >
+                          #{t}
+                        </span>
+                      ))}
+                    </div>
+
+                    <p className="mt-2 line-clamp-3 text-[11px] text-slate-600">
+                      {job.shortDesc}
+                    </p>
+
+                    <div className="mt-auto flex items-center justify-between pt-2 text-[10px] text-slate-500">
+                      <span>
+                        Diposting:{" "}
+                        <span className="text-slate-700">{job.postedAt}</span>
+                      </span>
+                      <span>
+                        Deadline:{" "}
+                        <span className="text-amber-600">{job.deadline}</span>
+                      </span>
+                    </div>
+
+                    <div className="mt-2 flex items-center justify-between">
+                      <div className="flex items-center gap-1 text-[10px] text-slate-500">
+                        <span className="h-1.5 w-1.5 rounded-full bg-blue-500" />
+                        <span>Detail & status lamaran tersedia</span>
+                      </div>
+                      <span className="inline-flex items-center gap-1 rounded-full bg-blue-600 px-3 py-1 text-[10px] font-semibold text-white transition group-hover:bg-blue-500">
+                        Lihat Detail
+                        <span className="translate-x-0 text-[11px] transition group-hover:translate-x-0.5">
+                          →
+                        </span>
+                      </span>
+                    </div>
+                  </Link>
+                );
+              })}
+            </div>
           )}
-        </div>
+        </section>
       </div>
     </div>
   );

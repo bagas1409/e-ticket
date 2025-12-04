@@ -13,7 +13,7 @@ export const dummyUmkm = [
     tags: ["Gula Aren", "Pangan"],
     image:
       "https://images.pexels.com/photos/4109998/pexels-photo-4109998.jpeg?auto=compress&cs=tinysrgb&w=800",
-    mapPosition: { x: 35, y: 40 }, // dipakai juga di map global
+    mapPosition: { x: 35, y: 40 },
     employeesSummary: {
       total: 8,
       roles: ["Produksi", "Packing", "Admin"],
