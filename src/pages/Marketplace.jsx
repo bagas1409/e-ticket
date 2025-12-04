@@ -158,14 +158,14 @@ export default function Marketplace() {
                       className="inline-flex items-center gap-1 rounded-full bg-blue-600 px-3 py-1 text-[10px] font-medium text-white hover:bg-blue-500"
                       onClick={(e) => {
                         e.stopPropagation(); // supaya tidak ikut trigger setSelected
-                        navigate(`/umkm/${p.umkmId}/produk/${p.productId}`);
+                        navigate(`/marketplace`);
                       }}
                     >
                       <FontAwesomeIcon
                         icon={faCartPlus}
                         className="text-[11px]"
                       />
-                      <span>Lihat Detail</span>
+                      <span>Beli</span>
                     </button>
                   </div>
                 </div>

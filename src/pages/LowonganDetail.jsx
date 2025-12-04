@@ -281,7 +281,7 @@ export default function LowonganDetail() {
                   icon={faCircleInfo}
                   className="text-[11px] text-blue-500"
                 />
-                Catatan Sistem (Dummy)
+                Catatan Sistem
               </p>
               <p className="mt-2 text-[11px] text-slate-700">
                 Ke depan, halaman ini bisa terhubung dengan:

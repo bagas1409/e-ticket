@@ -1,4 +1,9 @@
-export const categories = ["Semua", "Pangan", "Minuman", "Snack"];
+import market1Img from "../assets/gula.jpeg";
+import market2Img from "../assets/bubuk.jpeg";
+import market3Img from "../assets/pisang.jpeg";
+
+// Kategori filter di marketplace
+export const categories = ["Semua", "Makanan", "Minuman", "Produk Segar"];
 
 export const dummyProducts = [
   {
@@ -10,10 +15,9 @@ export const dummyProducts = [
     price: "Rp28.000",
     distance: "1.8 km",
     rating: 4.8,
-    category: "Pangan",
+    category: "Makanan", // ⬅️ disesuaikan
     desc: "Gula aren bubuk murni tanpa campuran, cocok untuk minuman dan kue.",
-    image:
-      "https://images.pexels.com/photos/4109998/pexels-photo-4109998.jpeg?auto=compress&cs=tinysrgb&w=800",
+    image: market1Img,
   },
   {
     id: 2,
@@ -24,10 +28,9 @@ export const dummyProducts = [
     price: "Rp35.000",
     distance: "3.2 km",
     rating: 4.6,
-    category: "Minuman",
+    category: "Makanan", // minuman tapi masih dalam grup makanan/produk konsumsi
     desc: "Kopi robusta khas Lampung dengan cita rasa kuat dan aroma khas.",
-    image:
-      "https://images.pexels.com/photos/895279/pexels-photo-895279.jpeg?auto=compress&cs=tinysrgb&w=800",
+    image: market2Img,
   },
   {
     id: 3,
@@ -38,9 +41,8 @@ export const dummyProducts = [
     price: "Rp18.000",
     distance: "2.0 km",
     rating: 4.9,
-    category: "Snack",
+    category: "Makanan", // snack juga masuk makanan
     desc: "Keripik pisang dengan lapisan coklat premium, renyah dan manis.",
-    image:
-      "https://images.pexels.com/photos/4110000/pexels-photo-4110000.jpeg?auto=compress&cs=tinysrgb&w=800",
+    image: market3Img,
   },
 ];

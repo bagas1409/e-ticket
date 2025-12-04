@@ -15,7 +15,7 @@ export const jobVacancies = [
     id: "job-aren-produksi-1",
     title: "Operator Produksi Gula Aren",
     companyName: "UMKM Aren Lestari",
-    umkmSlug: "umkm-aren-lestari", // bisa dikaitkan ke dummyUmkm
+    umkmSlug: "umkm-aren-lestari",
     location: "Pagelaran, Pringsewu",
     kecamatan: "Pagelaran",
     category: "Produksi & Gudang",
@@ -23,7 +23,7 @@ export const jobVacancies = [
     salaryRange: "Rp1.800.000 – Rp2.500.000",
     postedAt: "2025-11-20",
     deadline: "2025-12-31",
-    status: "Dibuka", // Dibuka / Ditutup
+    status: "Dibuka",
     tags: ["Produksi", "Gula Aren", "Pabrik Rumahan"],
     shortDesc:
       "Membantu proses produksi gula aren bubuk dan cetak, mulai dari pengolahan hingga pengemasan.",
@@ -151,7 +151,7 @@ export const jobVacancies = [
     id: "job-event-staff-1",
     title: "Staff Event & Booth UMKM",
     companyName: "Kolaborasi UMKM Pringsewu",
-    umkmSlug: null, // gabungan, bukan 1 UMKM saja
+    umkmSlug: null,
     location: "Alun-Alun Pringsewu (Event)",
     kecamatan: "Pringsewu",
     category: "Operasional & Driver",
@@ -172,6 +172,33 @@ export const jobVacancies = [
       "Pengalaman kerja lapangan",
       "Sertifikat kepanitiaan",
       "Makan siang saat event",
+    ],
+  },
+  {
+    id: "job-aren-content-1",
+    title: "Content Creator & Desain Kemasan",
+    companyName: "UMKM Aren Lestari",
+    umkmSlug: "umkm-aren-lestari",
+    location: "Pagelaran / Remote",
+    kecamatan: "Pagelaran",
+    category: "Lainnya",
+    type: "Part-time",
+    salaryRange: "Rp1.000.000 – Rp1.800.000",
+    postedAt: "2025-11-30",
+    deadline: "2026-01-10",
+    status: "Dibuka",
+    tags: ["Desain Konten", "Kemasan Produk", "Branding"],
+    shortDesc:
+      "Membuat konten visual untuk media sosial dan mengembangkan desain kemasan produk gula aren.",
+    requirements: [
+      "Menguasai aplikasi desain dasar (Canva/Corel/Photoshop minimal dasar)",
+      "Paham tren konten sosial media",
+      "Mampu menuangkan brief menjadi desain sederhana namun menarik",
+    ],
+    benefits: [
+      "Portofolio nyata untuk UMKM",
+      "Jam kerja fleksibel (bisa remote)",
+      "Kesempatan terlibat dalam pengembangan brand lokal",
     ],
   },
 ];

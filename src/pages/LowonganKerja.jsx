@@ -302,7 +302,7 @@ export default function LowonganKerja() {
                             icon={faTags}
                             className="text-[9px] text-slate-500"
                           />
-                          #{t}
+                          {t}
                         </span>
                       ))}
                     </div>

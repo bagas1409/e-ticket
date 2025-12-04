@@ -189,38 +189,95 @@ export default function UmkmProductDetail() {
           </div>
 
           {/* DETAIL */}
-          <div className="flex flex-col gap-3 md:col-span-2 text-xs">
-            <div className="rounded-2xl border border-blue-100 bg-gradient-to-br from-blue-100 to-sky-50 p-3 shadow-sm">
-              <p className="flex items-center gap-2 text-[11px] font-semibold text-slate-900">
-                <FontAwesomeIcon
-                  icon={faCircleInfo}
-                  className="text-[12px] text-blue-500"
-                />
-                <span>Deskripsi Singkat</span>
-              </p>
-              <p className="mt-2 text-[11px] text-slate-700">{product.note}</p>
-              <p className="mt-2 text-[10px] text-slate-500">
-                Data ini masih dummy. Ke depan, bisa diisi stok, varian rasa,
-                berat bersih, info komposisi, dan sertifikasi (halal, PIRT,
-                dll.).
-              </p>
+
+          <div className="flex flex-col gap-4 md:col-span-2 text-xs">
+            {/* RINGKASAN KECIL */}
+            <div className="grid gap-2 md:grid-cols-3">
+              <div className="flex items-center gap-2 rounded-2xl border border-blue-100 bg-blue-50 px-3 py-2">
+                <div className="flex h-7 w-7 items-center justify-center rounded-full bg-white shadow-sm">
+                  <FontAwesomeIcon
+                    icon={faBoxOpen}
+                    className="text-[13px] text-blue-600"
+                  />
+                </div>
+                <div>
+                  <p className="text-[10px] text-slate-500">Kategori Produk</p>
+                  <p className="text-[11px] font-semibold text-slate-900">
+                    {foundCategory?.name ?? "Produk UMKM"}
+                  </p>
+                </div>
+              </div>
+
+              <div className="flex items-center gap-2 rounded-2xl border border-blue-100 bg-blue-50 px-3 py-2">
+                <div className="flex h-7 w-7 items-center justify-center rounded-full bg-white shadow-sm">
+                  <span className="text-[12px] text-blue-600">Rp</span>
+                </div>
+                <div>
+                  <p className="text-[10px] text-slate-500">Harga</p>
+                  <p className="text-[11px] font-semibold text-blue-700">
+                    {product.price}
+                  </p>
+                </div>
+              </div>
+
+              <div className="flex items-center gap-2 rounded-2xl border border-blue-100 bg-blue-50 px-3 py-2">
+                <div className="flex h-7 w-7 items-center justify-center rounded-full bg-white shadow-sm">
+                  <span className="text-[12px]">⭐</span>
+                </div>
+                <div>
+                  <p className="text-[10px] text-slate-500">Rating UMKM</p>
+                  <p className="text-[11px] font-semibold text-slate-900">
+                    {umkm.rating} / 5.0
+                  </p>
+                </div>
+              </div>
             </div>
 
-            <div className="rounded-2xl border border-blue-100 bg-white p-3 shadow-sm">
-              <p className="flex items-center gap-2 text-[11px] font-semibold text-slate-900">
-                <FontAwesomeIcon
-                  icon={faTags}
-                  className="text-[12px] text-blue-500"
-                />
-                <span>Informasi UMKM Terkait</span>
-              </p>
-              <p className="mt-2 text-[11px] text-slate-700">
-                {umkm.name} berlokasi di {umkm.location} (Kec. {umkm.kecamatan})
-                dengan rating rata-rata ⭐ {umkm.rating}. Produk ini merupakan
-                bagian dari kategori{" "}
-                <span className="font-semibold">{foundCategory?.name}</span>{" "}
-                yang menjadi salah satu lini utama penjualan UMKM.
-              </p>
+            {/* DUA KARTU: DESKRIPSI & INFO UMKM */}
+            <div className="grid gap-3 md:grid-cols-2">
+              {/* DESKRIPSI */}
+              <div className="rounded-2xl border border-blue-100 bg-gradient-to-br from-blue-100 to-sky-50 p-3 shadow-sm">
+                <p className="flex items-center gap-2 text-[11px] font-semibold text-slate-900">
+                  <FontAwesomeIcon
+                    icon={faCircleInfo}
+                    className="text-[12px] text-blue-500"
+                  />
+                  <span>Deskripsi Produk</span>
+                </p>
+                <p className="mt-2 text-[11px] text-slate-700">
+                  {product.note}
+                </p>
+                <p className="mt-2 text-[10px] text-slate-500">
+                  Informasi produk di atas disediakan langsung oleh pelaku UMKM,
+                  termasuk detail penggunaan, keunggulan, dan catatan tambahan
+                  bila ada.
+                </p>
+              </div>
+
+              {/* INFO UMKM */}
+              <div className="rounded-2xl border border-blue-100 bg-white p-3 shadow-sm">
+                <p className="flex items-center gap-2 text-[11px] font-semibold text-slate-900">
+                  <FontAwesomeIcon
+                    icon={faTags}
+                    className="text-[12px] text-blue-500"
+                  />
+                  <span>Informasi UMKM Terkait</span>
+                </p>
+                <p className="mt-2 text-[11px] text-slate-700">
+                  <span className="font-semibold">{umkm.name}</span> berlokasi
+                  di {umkm.location} (Kec. {umkm.kecamatan}) dengan rating
+                  rata-rata ⭐ {umkm.rating}. Produk ini merupakan bagian dari
+                  kategori{" "}
+                  <span className="font-semibold">{foundCategory?.name}</span>{" "}
+                  yang menjadi salah satu unggulan dalam penjualan UMKM
+                  tersebut.
+                </p>
+                <p className="mt-2 text-[10px] text-slate-500">
+                  Profil UMKM ini dapat menjadi referensi bagi pembeli untuk
+                  melihat konsistensi kualitas, lokasi produksi, dan potensi
+                  kerja sama jangka panjang.
+                </p>
+              </div>
             </div>
           </div>
         </div>

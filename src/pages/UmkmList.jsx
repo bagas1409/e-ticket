@@ -16,10 +16,10 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 
 const UMKM_TYPES = [
-  { key: "Semua", label: "Semua", icon: "📦" },
-  { key: "Makanan & Minuman", label: "Makanan & Minuman", icon: "🍽️" },
-  { key: "Jasa", label: "Jasa", icon: "🛠️" },
-  { key: "Kerajinan", label: "Kerajinan", icon: "🎨" },
+  { key: "Semua", label: "Semua", icon: "" },
+  { key: "Makanan & Minuman", label: "Makanan & Minuman", icon: "" },
+  { key: "Jasa", label: "Jasa", icon: "" },
+  { key: "Kerajinan", label: "Kerajinan", icon: "" },
 ];
 
 const KECAMATAN_OPTIONS = ["Semua", "Pagelaran", "Gading Rejo", "Pringsewu"];
