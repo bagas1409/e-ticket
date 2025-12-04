@@ -1,35 +1,35 @@
 // src/data/destinasiDummy.js
 export const DESTINATION_CATEGORIES = [
-  { key: "Semua", label: "Semua Destinasi", icon: "⭐" },
+  { key: "Semua", label: "Semua Destinasi", icon: "" },
   {
     key: "Wisata Alam dan Perbukitan",
     label: "Alam & Perbukitan",
-    icon: "⛰️",
+    icon: "",
   },
   {
     key: "Wisata Air dan Danau",
     label: "Air & Danau",
-    icon: "💧",
+    icon: "",
   },
   {
     key: "Wisata Edukasi dan Keluarga",
     label: "Edukasi & Keluarga",
-    icon: "🎓",
+    icon: "",
   },
   {
     key: "Wisata Religi dan Sejarah",
     label: "Religi & Sejarah",
-    icon: "🕌",
+    icon: "",
   },
   {
     key: "Wisata Kuliner dan Belanja",
     label: "Kuliner & Belanja",
-    icon: "🍜",
+    icon: "",
   },
   {
     key: "Taman Kekinian / Spot Instagramable",
     label: "Spot Instagramable",
-    icon: "📸",
+    icon: "",
   },
 ];
 

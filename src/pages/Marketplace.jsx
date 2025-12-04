@@ -1,11 +1,25 @@
+// src/pages/Marketplace.jsx
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { categories, dummyProducts } from "../data/MarketplaceDummy";
+
+// Font Awesome
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import {
+  faStore,
+  faSearch,
+  faTags,
+  faCartPlus,
+  faLocationDot,
+  faStar,
+  faArrowLeft,
+} from "@fortawesome/free-solid-svg-icons";
 
 export default function Marketplace() {
   const [search, setSearch] = useState("");
   const [category, setCategory] = useState("Semua");
   const [selected, setSelected] = useState(dummyProducts[0]);
+  const navigate = useNavigate(); // <== tambahkan ini
 
   const filtered = dummyProducts.filter((p) => {
     const term = search.toLowerCase();
@@ -17,15 +31,16 @@ export default function Marketplace() {
   });
 
   return (
-    <div className="min-h-screen bg-slate-50">
+    <div className="min-h-screen bg-gradient-to-b from-sky-50 via-white to-sky-50">
       <div className="mx-auto max-w-6xl px-4 py-6 text-slate-900">
         {/* HEADER */}
         <div className="mb-5 flex flex-col gap-3 md:flex-row md:items-center md:justify-between">
           <div>
-            <p className="text-xs uppercase tracking-[0.2em] text-blue-600">
-              Marketplace UMKM
+            <p className="flex items-center gap-2 text-xs uppercase tracking-[0.2em] text-blue-600">
+              <FontAwesomeIcon icon={faStore} className="text-[13px]" />
+              <span>Marketplace UMKM</span>
             </p>
-            <h1 className="text-lg font-semibold md:text-2xl">
+            <h1 className="mt-1 text-lg font-semibold md:text-2xl">
               Belanja Produk UMKM Pringsewu
             </h1>
             <p className="mt-1 text-xs md:text-sm text-slate-600">
@@ -35,35 +50,46 @@ export default function Marketplace() {
           </div>
           <Link
             to="/"
-            className="text-xs md:text-sm text-blue-600 underline-offset-2 hover:underline"
+            className="inline-flex items-center gap-2 text-xs md:text-sm text-blue-600 underline-offset-2 hover:underline"
           >
-            ← Kembali ke Dashboard
+            <FontAwesomeIcon icon={faArrowLeft} className="text-[11px]" />
+            <span>Kembali ke Dashboard</span>
           </Link>
         </div>
 
         {/* FILTER BAR */}
         <div className="mb-4 flex flex-col gap-3 md:flex-row md:items-center md:justify-between">
+          {/* Search */}
           <div className="flex flex-1 items-center gap-2">
-            <input
-              type="text"
-              placeholder="Cari produk atau UMKM..."
-              className="w-full rounded-xl border border-slate-300 bg-white px-3 py-2 text-xs text-slate-800 placeholder:text-slate-400 focus:border-blue-500 focus:outline-none"
-              value={search}
-              onChange={(e) => setSearch(e.target.value)}
-            />
+            <div className="flex w-full items-center gap-2 rounded-xl border border-blue-100 bg-white px-3 py-2">
+              <FontAwesomeIcon
+                icon={faSearch}
+                className="text-[13px] text-slate-400"
+              />
+              <input
+                type="text"
+                placeholder="Cari produk atau UMKM..."
+                className="w-full bg-transparent text-xs text-slate-800 placeholder:text-slate-400 focus:outline-none"
+                value={search}
+                onChange={(e) => setSearch(e.target.value)}
+              />
+            </div>
           </div>
+
+          {/* Kategori */}
           <div className="flex flex-wrap gap-2 text-[11px]">
             {categories.map((cat) => (
               <button
                 key={cat}
                 onClick={() => setCategory(cat)}
-                className={`rounded-full border px-3 py-1 transition ${
+                className={`inline-flex items-center gap-1 rounded-full border px-3 py-1 transition ${
                   category === cat
                     ? "border-blue-500 bg-blue-50 text-blue-700"
-                    : "border-slate-300 bg-white text-slate-700 hover:border-blue-300 hover:text-blue-600"
+                    : "border-blue-100 bg-white text-slate-700 hover:border-blue-300 hover:text-blue-600"
                 }`}
               >
-                {cat}
+                <FontAwesomeIcon icon={faTags} className="text-[11px]" />
+                <span>{cat}</span>
               </button>
             ))}
           </div>
@@ -74,17 +100,18 @@ export default function Marketplace() {
           {/* LIST PRODUK */}
           <div className="space-y-3 md:col-span-2">
             {filtered.map((p) => (
-              <button
+              <div
                 key={p.id}
+                role="button"
                 onClick={() => setSelected(p)}
                 className={`flex w-full items-stretch gap-3 rounded-2xl border p-3 text-left text-xs transition ${
                   selected?.id === p.id
-                    ? "border-blue-500 bg-blue-50/60 shadow-sm"
-                    : "border-slate-200 bg-white hover:border-blue-300 hover:shadow-sm"
+                    ? "border-blue-500 bg-blue-50/70 shadow-sm"
+                    : "border-blue-100 bg-white hover:border-blue-300 hover:shadow-sm"
                 }`}
               >
                 {/* THUMBNAIL */}
-                <div className="h-20 w-20 flex-shrink-0 overflow-hidden rounded-xl border border-slate-200 bg-slate-100">
+                <div className="h-20 w-20 flex-shrink-0 overflow-hidden rounded-xl border border-blue-100 bg-slate-100">
                   <img
                     src={p.image}
                     alt={p.name}
@@ -99,20 +126,50 @@ export default function Marketplace() {
                       {p.name}
                     </p>
                     <p className="text-[11px] text-slate-600">{p.umkm}</p>
-                    <p className="mt-1 text-[11px] text-slate-600">
-                      {p.price} • {p.distance} • ⭐ {p.rating}
+                    <p className="mt-1 flex flex-wrap items-center gap-2 text-[11px] text-slate-600">
+                      <span className="font-semibold text-blue-600">
+                        {p.price}
+                      </span>
+                      <span className="inline-flex items-center gap-1">
+                        <FontAwesomeIcon
+                          icon={faLocationDot}
+                          className="text-[11px] text-blue-500"
+                        />
+                        <span>{p.distance}</span>
+                      </span>
+                      <span className="inline-flex items-center gap-1">
+                        <FontAwesomeIcon
+                          icon={faStar}
+                          className="text-[11px] text-amber-400"
+                        />
+                        <span>{p.rating}</span>
+                      </span>
                     </p>
                   </div>
                   <div className="mt-2 flex items-center justify-between">
-                    <span className="inline-flex rounded-full bg-slate-100 px-2 py-0.5 text-[10px] text-slate-700 border border-slate-200">
-                      {p.category}
+                    <span className="inline-flex items-center gap-1 rounded-full bg-sky-50 px-2 py-0.5 text-[10px] text-blue-700 border border-blue-100">
+                      <FontAwesomeIcon icon={faTags} className="text-[10px]" />
+                      <span>{p.category}</span>
                     </span>
-                    <span className="rounded-full bg-blue-600 px-3 py-1 text-[10px] font-medium text-white">
-                      Pilih
-                    </span>
+
+                    {/* TOMBOL KE DETAIL PRODUK UMKM */}
+                    <button
+                      type="button"
+                      className="inline-flex items-center gap-1 rounded-full bg-blue-600 px-3 py-1 text-[10px] font-medium text-white hover:bg-blue-500"
+                      onClick={(e) => {
+                        e.stopPropagation(); // supaya tidak ikut trigger setSelected
+                        navigate(`/umkm/${p.umkmId}/produk/${p.productId}`);
+                      }}
+                    >
+                      <FontAwesomeIcon
+                        icon={faCartPlus}
+                        className="text-[11px]"
+                      />
+                      <span>Lihat Detail</span>
+                    </button>
                   </div>
                 </div>
-              </button>
+              </div>
             ))}
 
             {filtered.length === 0 && (
@@ -122,15 +179,16 @@ export default function Marketplace() {
             )}
           </div>
 
-          {/* DETAIL PRODUK */}
-          <div className="rounded-2xl border border-slate-200 bg-white p-4 text-xs shadow-sm">
-            <p className="text-[11px] font-semibold uppercase tracking-wide text-blue-600">
-              Detail Produk
+          {/* DETAIL PRODUK (preview di kanan tetap ada) */}
+          <div className="rounded-2xl border border-blue-100 bg-white p-4 text-xs shadow-sm">
+            <p className="flex items-center gap-2 text-[11px] font-semibold uppercase tracking-wide text-blue-600">
+              <FontAwesomeIcon icon={faStore} className="text-[12px]" />
+              <span>Detail Produk</span>
             </p>
+
             {selected ? (
               <>
-                {/* IMAGE BESAR */}
-                <div className="mt-3 h-40 w-full overflow-hidden rounded-xl border border-slate-200 bg-slate-100">
+                <div className="mt-3 h-40 w-full overflow-hidden rounded-xl border border-blue-100 bg-slate-100">
                   <img
                     src={selected.image}
                     alt={selected.name}
@@ -142,18 +200,42 @@ export default function Marketplace() {
                   {selected.name}
                 </h2>
                 <p className="text-[11px] text-slate-600">{selected.umkm}</p>
-                <p className="mt-2 text-sm font-semibold text-blue-600">
-                  {selected.price}
+
+                <p className="mt-2 flex flex-wrap items-center gap-2 text-[11px]">
+                  <span className="text-sm font-semibold text-blue-600">
+                    {selected.price}
+                  </span>
+                  <span className="inline-flex items-center gap-1 text-slate-600">
+                    <FontAwesomeIcon
+                      icon={faLocationDot}
+                      className="text-[11px] text-blue-500"
+                    />
+                    <span>{selected.distance}</span>
+                  </span>
+                  <span className="inline-flex items-center gap-1 text-slate-600">
+                    <FontAwesomeIcon
+                      icon={faStar}
+                      className="text-[11px] text-amber-400"
+                    />
+                    <span>{selected.rating}</span>
+                  </span>
                 </p>
-                <p className="mt-1 text-[11px] text-slate-600">
-                  {selected.distance} • ⭐ {selected.rating}
-                </p>
+
                 <p className="mt-3 text-[11px] text-slate-700">
                   {selected.desc}
                 </p>
 
-                <button className="mt-4 w-full rounded-full bg-blue-600 px-3 py-2 text-[11px] font-semibold text-white hover:bg-blue-500">
-                  Tambah ke Keranjang (Dummy)
+                <button
+                  type="button"
+                  className="mt-4 flex w-full items-center justify-center gap-2 rounded-full bg-blue-600 px-3 py-2 text-[11px] font-semibold text-white hover:bg-blue-500"
+                  onClick={() =>
+                    navigate(
+                      `/umkm/${selected.umkmId}/produk/${selected.productId}`
+                    )
+                  }
+                >
+                  <FontAwesomeIcon icon={faCartPlus} className="text-[12px]" />
+                  <span>Lihat Detail Produk UMKM</span>
                 </button>
               </>
             ) : (

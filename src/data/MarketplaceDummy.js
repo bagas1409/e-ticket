@@ -3,6 +3,8 @@ export const categories = ["Semua", "Pangan", "Minuman", "Snack"];
 export const dummyProducts = [
   {
     id: 1,
+    umkmId: 1, // ➜ UMKM Aren Lestari
+    productId: "aren-bubuk-500", // ➜ id produk di umkmDummy (UMKM id 1)
     name: "Gula Aren Bubuk 500gr",
     umkm: "UMKM Aren Lestari",
     price: "Rp28.000",
@@ -15,6 +17,8 @@ export const dummyProducts = [
   },
   {
     id: 2,
+    umkmId: 2, // ➜ Kopi Bukit Randu
+    productId: "kopi-biji-medium", // ➜ id produk di UMKM id 2
     name: "Kopi Robusta Lampung 250gr",
     umkm: "Kopi Bukit Randu",
     price: "Rp35.000",
@@ -27,6 +31,8 @@ export const dummyProducts = [
   },
   {
     id: 3,
+    umkmId: 3, // ➜ Banana Crispy Pringsewu
+    productId: "pisang-coklat", // ➜ id produk di UMKM id 3
     name: "Keripik Pisang Coklat",
     umkm: "Banana Crispy Pringsewu",
     price: "Rp18.000",
