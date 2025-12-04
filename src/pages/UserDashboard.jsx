@@ -11,7 +11,7 @@ export default function UserDashboard() {
   const navigate = useNavigate();
 
   return (
-    <div className="min-h-[calc(100vh-56px)] bg-slate-50 text-slate-900">
+    <div className="min-h-[calc(100vh-56px)] bg-gradient-to-b from-sky-50 via-white to-sky-50 text-slate-900">
       {/* CONTENT */}
       <main className="mx-auto flex max-w-6xl flex-col gap-6 px-4 py-6 md:py-8">
         {/* HEADER DALAM */}
@@ -20,8 +20,9 @@ export default function UserDashboard() {
             <p className="text-xs uppercase tracking-[0.2em] text-blue-600">
               Dashboard Pengguna
             </p>
-            <h1 className="text-lg font-semibold md:text-2xl">
-              Selamat datang, <span className="text-blue-600">User</span> 👋
+            <h1 className="text-lg font-semibold md:text-2xl text-slate-900">
+              Selamat datang,{" "}
+              <span className="text-blue-700 font-bold">User</span> 👋
             </h1>
             <p className="mt-1 text-xs md:text-sm text-slate-600">
               Ringkasan aktivitas belanja, wisata, dan lowongan kerja dalam satu
@@ -37,25 +38,25 @@ export default function UserDashboard() {
               label="Poin & Voucher"
               value="120"
               subtitle="3 voucher aktif"
-              accent="bg-emerald-100 text-emerald-700 border border-emerald-200"
+              accent="bg-blue-50 text-blue-700 border border-blue-200"
             />
             <DashboardCard
               label="Pesanan Aktif"
               value="2"
               subtitle="Sedang dikirim"
-              accent="bg-sky-100 text-sky-700 border border-sky-200"
+              accent="bg-sky-50 text-sky-700 border border-sky-200"
             />
             <DashboardCard
               label="Lamaran Kerja"
               value="5"
               subtitle="1 diproses"
-              accent="bg-amber-100 text-amber-700 border border-amber-200"
+              accent="bg-blue-100 text-blue-800 border border-blue-300"
             />
             <DashboardCard
               label="Wishlist"
               value="9"
               subtitle="Produk & destinasi"
-              accent="bg-pink-100 text-pink-700 border border-pink-200"
+              accent="bg-sky-50 text-sky-700 border border-sky-200"
             />
           </div>
         </section>
@@ -94,7 +95,7 @@ export default function UserDashboard() {
         {/* SECTION: 2 COLUMN */}
         <section className="grid gap-4 md:grid-cols-3">
           {/* Aktivitas Terbaru */}
-          <div className="col-span-2 rounded-2xl border border-slate-200 bg-white p-4 shadow-sm">
+          <div className="col-span-2 rounded-2xl border border-blue-100 bg-gradient-to-br from-blue-200 to-sky-50 p-4 shadow-sm">
             <div className="mb-3 flex items-center justify-between">
               <h2 className="text-sm font-semibold text-slate-900">
                 Aktivitas Terbaru
@@ -119,11 +120,16 @@ export default function UserDashboard() {
                 tag="Wisata"
                 time="Kemarin"
               />
+              <ActivityItem
+                title="Menambahkan 'Pantai Pucuk Emas' ke wishlist"
+                tag="Wisata"
+                time="Kemarin"
+              />
             </div>
           </div>
 
           {/* Status Lamaran */}
-          <div className="rounded-2xl border border-slate-200 bg-white p-4 shadow-sm">
+          <div className="rounded-2xl border border-blue-100 bg-gradient-to-br from-blue-200 to-sky-50 p-4 shadow-sm">
             <h2 className="mb-3 text-sm font-semibold text-slate-900">
               Status Lamaran Kerja
             </h2>
@@ -132,7 +138,7 @@ export default function UserDashboard() {
                 posisi="Staff Administrasi UMKM"
                 tempat="CV Sejahtera Mandiri"
                 status="Diproses"
-                statusColor="bg-amber-50 text-amber-700 border-amber-200"
+                statusColor="bg-blue-50 text-blue-700 border-blue-200"
               />
               <JobStatus
                 posisi="Kasir Minimarket"
@@ -144,7 +150,7 @@ export default function UserDashboard() {
                 posisi="Content Creator UMKM"
                 tempat="Rumah Kreatif"
                 status="Ditolak"
-                statusColor="bg-rose-50 text-rose-700 border-rose-200"
+                statusColor="bg-slate-100 text-slate-900 border-slate-300"
               />
             </div>
           </div>
@@ -166,7 +172,7 @@ export default function UserDashboard() {
 
           <div className="grid gap-4 md:grid-cols-3">
             {/* 1️⃣ Produk UMKM Terbaik */}
-            <div className="rounded-2xl border border-slate-200 bg-white p-4 shadow-sm">
+            <div className="rounded-2xl border border-blue-100 bg-gradient-to-br from-blue-200 to-sky-50 p-4 shadow-sm">
               <div className="mb-3 flex items-center justify-between">
                 <h3 className="text-xs font-semibold text-slate-900">
                   Produk UMKM Terbaik
@@ -184,20 +190,20 @@ export default function UserDashboard() {
                 {recommendedProducts.map((p) => (
                   <div
                     key={p.id}
-                    className="flex items-center justify-between rounded-xl border border-slate-200 bg-slate-50 px-3 py-2"
+                    className="flex items-center justify-between rounded-xl border border-blue-100 bg-blue-50/70 px-3 py-2"
                   >
                     <div className="flex-1">
                       <p className="text-[12px] font-semibold text-slate-900">
                         {p.name}
                       </p>
                       <p className="text-[11px] text-slate-600">{p.umkm}</p>
-                      <p className="mt-1 text-[11px] text-blue-600">
+                      <p className="mt-1 text-[11px] text-blue-700">
                         {p.price}
                       </p>
                     </div>
                     <div className="ml-3 text-right text-[11px] text-slate-600">
                       <p>⭐ {p.rating}</p>
-                      <p className="mt-1 rounded-full bg-slate-100 px-2 py-0.5 text-[10px]">
+                      <p className="mt-1 rounded-full bg-white px-2 py-0.5 text-[10px] border border-blue-100 text-blue-700">
                         Rekomendasi
                       </p>
                     </div>
@@ -207,7 +213,7 @@ export default function UserDashboard() {
             </div>
 
             {/* 2️⃣ Event yang Akan Diselenggarakan */}
-            <div className="rounded-2xl border border-slate-200 bg-white p-4 shadow-sm">
+            <div className="rounded-2xl border border-blue-100 bg-gradient-to-br from-blue-200 to-sky-50 p-4 shadow-sm">
               <div className="mb-3 flex items-center justify-between">
                 <h3 className="text-xs font-semibold text-slate-900">
                   Event yang Akan Diselenggarakan
@@ -224,7 +230,7 @@ export default function UserDashboard() {
                 {upcomingEvents.map((e) => (
                   <div
                     key={e.id}
-                    className="rounded-xl border border-slate-200 bg-slate-50 px-3 py-2"
+                    className="rounded-xl border border-blue-100 bg-blue-50/70 px-3 py-2"
                   >
                     <p className="text-[12px] font-semibold text-slate-900">
                       {e.title}
@@ -233,7 +239,7 @@ export default function UserDashboard() {
                       {e.date} • {e.location}
                     </p>
                     <p className="mt-1 text-[11px] text-slate-600">{e.note}</p>
-                    <p className="mt-2 inline-flex rounded-full bg-emerald-50 px-2 py-0.5 text-[10px] text-emerald-700 border border-emerald-200">
+                    <p className="mt-2 inline-flex rounded-full bg-white px-2 py-0.5 text-[10px] text-blue-700 border border-blue-200">
                       Cocok untuk promosi UMKM
                     </p>
                   </div>
@@ -242,7 +248,7 @@ export default function UserDashboard() {
             </div>
 
             {/* 3️⃣ Destinasi Wisata Populer */}
-            <div className="rounded-2xl border border-slate-200 bg-white p-4 shadow-sm">
+            <div className="rounded-2xl border border-blue-100 bg-gradient-to-br from-blue-200 to-sky-50 p-4 shadow-sm">
               <div className="mb-3 flex items-center justify-between">
                 <h3 className="text-xs font-semibold text-slate-900">
                   Destinasi Wisata Populer
@@ -260,7 +266,7 @@ export default function UserDashboard() {
                 {popularDestinations.map((d) => (
                   <div
                     key={d.id}
-                    className="flex items-center justify-between rounded-xl border border-slate-200 bg-slate-50 px-3 py-2"
+                    className="flex items-center justify-between rounded-xl border border-blue-100 bg-blue-50/70 px-3 py-2"
                   >
                     <div className="flex-1">
                       <p className="text-[12px] font-semibold text-slate-900">
@@ -272,7 +278,7 @@ export default function UserDashboard() {
                     </div>
                     <div className="ml-3 text-right text-[11px] text-slate-600">
                       <p>⭐ {d.rating}</p>
-                      <p className="mt-1 rounded-full bg-slate-100 px-2 py-0.5 text-[10px]">
+                      <p className="mt-1 rounded-full bg-white px-2 py-0.5 text-[10px] border border-blue-200 text-blue-700">
                         Ramai dikunjungi
                       </p>
                     </div>
@@ -291,7 +297,7 @@ export default function UserDashboard() {
 
 function DashboardCard({ label, value, subtitle, accent }) {
   return (
-    <div className="relative overflow-hidden rounded-2xl border border-slate-200 bg-white p-4 shadow-sm">
+    <div className="relative overflow-hidden rounded-2xl border border-blue-100 bg-gradient-to-br from-blue-300 to-sky-50 p-4 shadow-sm">
       <div
         className={`mb-2 inline-flex rounded-full px-2 py-0.5 text-[10px] ${accent}`}
       >
@@ -299,7 +305,7 @@ function DashboardCard({ label, value, subtitle, accent }) {
       </div>
       <p className="text-2xl font-semibold text-slate-900">{value}</p>
       <p className="mt-1 text-xs text-slate-600">{subtitle}</p>
-      <div className="pointer-events-none absolute -right-6 -top-6 h-16 w-16 rounded-full bg-gradient-to-tr from-blue-500/10 via-sky-400/10 to-transparent" />
+      <div className="pointer-events-none absolute -right-6 -top-6 h-16 w-16 rounded-full bg-gradient-to-tr from-blue-400/15 via-sky-400/20 to-transparent" />
     </div>
   );
 }
@@ -308,9 +314,9 @@ function QuickActionButton({ title, desc, onClick }) {
   return (
     <button
       onClick={onClick}
-      className="group flex flex-col items-start justify-between rounded-2xl border border-slate-200 bg-white px-4 py-3 text-left text-xs transition hover:-translate-y-0.5 hover:border-blue-400 hover:bg-blue-50 hover:shadow-md"
+      className="group flex flex-col items-start justify-between rounded-2xl border border-blue-100 bg-gradient-to-br from-blue-300 to-blue-50 px-4 py-3 text-left text-xs transition hover:-translate-y-0.5 hover:border-blue-400 hover:bg-blue-100 hover:shadow-md"
     >
-      <span className="mb-1 text-sm font-semibold text-slate-900 group-hover:text-blue-600">
+      <span className="mb-1 text-sm font-semibold text-slate-900 group-hover:text-blue-700">
         {title}
       </span>
       <span className="text-[11px] text-slate-600">{desc}</span>
@@ -320,14 +326,14 @@ function QuickActionButton({ title, desc, onClick }) {
 
 function ActivityItem({ title, tag, time }) {
   return (
-    <div className="flex items-start justify-between gap-3 rounded-xl border border-slate-200 bg-slate-50 px-3 py-2.5">
+    <div className="flex items-start justify-between gap-3 rounded-xl border border-blue-100 bg-blue-50/70 px-3 py-2.5">
       <div>
         <p className="text-xs font-medium text-slate-900">{title}</p>
         <p className="mt-1 text-[11px] text-slate-600">
           {tag} • {time}
         </p>
       </div>
-      <span className="mt-0.5 rounded-full bg-slate-100 px-2 py-0.5 text-[10px] text-slate-700">
+      <span className="mt-0.5 rounded-full bg-white px-2 py-0.5 text-[10px] text-blue-700 border border-blue-200">
         Detail
       </span>
     </div>
@@ -336,7 +342,7 @@ function ActivityItem({ title, tag, time }) {
 
 function JobStatus({ posisi, tempat, status, statusColor }) {
   return (
-    <div className="rounded-xl border border-slate-200 bg-slate-50 p-3">
+    <div className="rounded-xl border border-blue-100 bg-blue-50/70 p-3">
       <p className="text-[13px] font-semibold text-slate-900">{posisi}</p>
       <p className="text-[11px] text-slate-600">{tempat}</p>
       <span
@@ -348,12 +354,12 @@ function JobStatus({ posisi, tempat, status, statusColor }) {
   );
 }
 
-// (Masih belum dipakai, tapi kalau nanti mau dipakai, sudah match tema putih–biru)
+// Masih opsional, tapi sudah ikut tema putih–biru–hitam
 function RecommendCard({ title, type, info }) {
   return (
-    <div className="flex flex-col justify-between rounded-2xl border border-slate-200 bg-white p-4 shadow-sm">
+    <div className="flex flex-col justify-between rounded-2xl border border-blue-100 bg-gradient-to-br from-white to-sky-50 p-4 shadow-sm">
       <div className="mb-3">
-        <span className="mb-1 inline-flex rounded-full bg-slate-100 px-2 py-0.5 text-[10px] text-slate-700">
+        <span className="mb-1 inline-flex rounded-full bg-blue-50 px-2 py-0.5 text-[10px] text-blue-700 border border-blue-200">
           {type}
         </span>
         <h3 className="mt-1 text-sm font-semibold text-slate-900">{title}</h3>

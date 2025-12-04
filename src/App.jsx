@@ -16,13 +16,13 @@ function App() {
   const isDashboard = location.pathname === "/";
 
   return (
-    <div className="min-h-screen bg-slate-50 text-slate-900">
+    <div className="min-h-screen bg-gradient-to-b from-sky-50 via-white to-sky-50 text-slate-900">
       {/* SIMPLE TOP NAV */}
-      <header className="border-b border-slate-200 bg-white/80 backdrop-blur">
+      <header className="border-b border-blue-100 bg-white/80 backdrop-blur">
         <div className="mx-auto flex max-w-6xl items-center justify-between px-4 py-3">
           <Link
             to="/"
-            className="text-sm font-semibold text-blue-600 hover:text-blue-700"
+            className="text-sm font-semibold text-blue-700 hover:text-blue-800"
           >
             UMKM &amp; Layanan Warga
           </Link>
@@ -32,8 +32,8 @@ function App() {
               to="/"
               className={`rounded-full px-3 py-1 ${
                 isDashboard
-                  ? "bg-blue-600 text-white shadow-sm"
-                  : "border border-slate-200 text-slate-700 hover:border-blue-400 hover:text-blue-600"
+                  ? "bg-blue-600 text-white shadow-sm border border-blue-600"
+                  : "border border-blue-100 bg-white text-slate-700 hover:border-blue-400 hover:text-blue-700"
               }`}
             >
               Dashboard
@@ -41,28 +41,28 @@ function App() {
 
             <Link
               to="/wisata"
-              className="rounded-full border border-slate-200 px-3 py-1 text-slate-700 hover:border-blue-400 hover:text-blue-600"
+              className="rounded-full border border-blue-100 bg-white px-3 py-1 text-slate-700 hover:border-blue-400 hover:text-blue-700"
             >
               Destinasi
             </Link>
 
             <Link
               to="/lowongan"
-              className="rounded-full border border-slate-200 px-3 py-1 text-slate-700 hover:border-blue-400 hover:text-blue-600"
+              className="rounded-full border border-blue-100 bg-white px-3 py-1 text-slate-700 hover:border-blue-400 hover:text-blue-700"
             >
               Lowongan
             </Link>
 
             <Link
               to="/umkm"
-              className="rounded-full border border-slate-200 px-3 py-1 text-slate-700 hover:border-blue-400 hover:text-blue-600"
+              className="rounded-full border border-blue-100 bg-white px-3 py-1 text-slate-700 hover:border-blue-400 hover:text-blue-700"
             >
               UMKM
             </Link>
 
             <Link
               to="/marketplace"
-              className="rounded-full border border-slate-200 px-3 py-1 text-slate-700 hover:border-blue-400 hover:text-blue-600"
+              className="rounded-full border border-blue-100 bg-white px-3 py-1 text-slate-700 hover:border-blue-400 hover:text-blue-700"
             >
               Marketplace
             </Link>

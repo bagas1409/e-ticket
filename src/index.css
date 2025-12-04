@@ -1,6 +1,16 @@
 @import "tailwindcss";
+
+@theme {
+  /* Definisikan warna custom Anda di sini */
+  --color-primary: #4300ff; /* Untuk Card, dll */
+  --color-surface: #eef7ff; /* Untuk Background */
+
+  /* Opsional: Jika ingin membuat alias untuk slate-900 */
+  --color-text-main: var(--color-slate-900);
+}
 body {
-  @apply bg-slate-50 text-slate-900;
+  background-color: var(--color-surface);
+  color: var(--color-slate-900);
   font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
     sans-serif;
 }
