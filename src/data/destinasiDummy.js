@@ -2,7 +2,7 @@
 import wisata1 from "../assets/wisataalam.jpeg";
 import wisata2 from "../assets/kuliner.jpeg";
 import wisata3 from "../assets/kakao.jpeg";
-import wisata4 from "../assets/Masjid.jpeg";
+import wisata4 from "../assets/masjid.jpeg";
 
 export const DESTINATION_CATEGORIES = [
   { key: "Semua", label: "Semua Destinasi", icon: "" },
