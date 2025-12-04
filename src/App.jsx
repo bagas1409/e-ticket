@@ -7,6 +7,7 @@ import LowonganKerja from "./pages/LowonganKerja.jsx";
 import UmkmList from "./pages/UmkmList.jsx";
 import UmkmProductDetail from "./pages/UmkmProductDetail.jsx";
 import UmkmDetail from "./pages/UmkmDetail.jsx";
+import WisataDetail from "./pages/WisataDetail.jsx";
 
 function App() {
   const location = useLocation();
@@ -76,6 +77,7 @@ function App() {
         <Route path="/marketplace" element={<Marketplace />} />
         <Route path="/wisata" element={<DestinasiWisata />} />
         <Route path="/lowongan" element={<LowonganKerja />} />
+        <Route path="/wisata/:id" element={<WisataDetail />} />
       </Routes>
     </div>
   );
