@@ -24,7 +24,7 @@ function App() {
             to="/"
             className="text-sm font-semibold text-blue-600 hover:text-blue-700"
           >
-            CENIL • UMKM &amp; Layanan Warga
+            UMKM &amp; Layanan Warga
           </Link>
 
           <nav className="flex gap-3 text-xs">

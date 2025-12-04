@@ -1,6 +1,3 @@
-// src/data/lowonganDummy.js
-
-// Kategori utama lowongan (buat filter di UI)
 export const JOB_CATEGORIES = [
   "Produksi & Gudang",
   "Penjualan & Marketing",
