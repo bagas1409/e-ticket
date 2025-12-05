@@ -58,7 +58,7 @@ function App() {
                 to="/lowongan"
                 className="rounded-full border border-blue-100 bg-white px-3 py-1 text-slate-700 hover:border-blue-400 hover:text-blue-700"
               >
-                Lowongan
+                Lowongan kerja
               </Link>
 
               <Link
